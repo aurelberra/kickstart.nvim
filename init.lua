@@ -154,6 +154,32 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- https://github.com/ThePrimeagen/init.lua/blob/master/lua/theprimeagen/set.lua
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
+vim.opt.undofile = true
+vim.opt.colorcolumn = '80'
+
+-- https://github.com/fabi1cazenave/dotFiles/blob/master/config/nvim/
+------------------------------------------------------------------------------
+
+vim.g.startify_session_persistence = 1
+
+if vim.g.neovide then
+  -- vim.o.guifont = 'DejaVu Sans Mono:h9'
+  -- vim.o.guifont = 'FantasqueSansMono Nerd Font Mono:h9'
+  -- https://github.com/neovide/neovide/wiki/Configuration
+  -- vim.g.neovide_floating_blur_amount_x  = 2.0
+  -- vim.g.neovide_floating_blur_amount_y  = 2.0
+  vim.g.neovide_scroll_animation_length = 0.3
+  vim.g.neovide_cursor_animation_length = 0.13
+  vim.g.neovide_cursor_vfx_mode = 'wireframe'
+end
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -186,6 +212,15 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- https://github.com/ThePrimeagen/init.lua/blob/master/lua/theprimeagen/remap.lua
+vim.keymap.set('n', 'J', 'mzJ`z')
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
+vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz')
+vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz')
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -866,6 +901,27 @@ require('lazy').setup({
       --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     end,
   },
+  -- https://github.com/fabi1cazenave/dotFiles/blob/master/config/nvim/
+------------------------------------------------------------------------------
+-- VimScript plugins
+------------------------------------------------------------------------------
+
+-- in Tim Pope we trust
+{'tpope/vim-sensible'}, -- better default settings
+{'tpope/vim-unimpaired'}, -- better default mappings
+{'tpope/vim-surround'}, -- quoting/parenthesizing made simple
+{'tpope/vim-repeat'}, -- required to support `.` with some plugins
+{'tpope/vim-characterize'}, -- `ga` gets the Unicode description of a char
+{'tpope/vim-commentary'}, -- toggle comments easily
+
+-- Git
+{'tpope/vim-fugitive'},
+
+-- start screen
+{'mhinz/vim-startify'},
+
+-- all language packs, async’ed
+{'sheerun/vim-polyglot'},
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
@@ -888,7 +944,7 @@ require('lazy').setup({
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
